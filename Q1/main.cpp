@@ -15,20 +15,23 @@ int busca_sequencial_recursiva(int *a, int n, int x)
 void testar_busca_sequencial_recursiva() {
     cout << "Testando busca sequencial recursiva\n\n";
 
-    // Vetor de teste
-    int vetores[][10] = {
-        {},                        // Vetor vazio
-        {10},                      // Vetor com um elemento
-        {1, 2, 3, 4, 5},           // Vetor em ordem crescente
-        {5, 4, 3, 2, 1},           // Vetor em ordem decrescente
-        {1, 2, 2, 6, 8, 3, 4, 5},  // Vetor com elementos repetidos
-    };
+    // Vetores de teste
+    int vetor1[] = {};                         // Vetor vazio
+    int vetor2[] = {10};                       // Vetor com um elemento
+    int vetor3[] = {1, 2, 3, 4, 5};            // Vetor em ordem crescente
+    int vetor4[] = {5, 4, 3, 2, 1};            // Vetor em ordem decrescente
+    int vetor5[] = {1, 2, 2, 6, 8, 3, 4, 5};   // Vetor com elementos repetidos
 
-    for (auto& vetor : vetores) {
-        int n = sizeof(vetor) / sizeof(vetor[0]);
-        cout << "Vetor: ";
-        for (int i = 0; i < n; i++) {
-            cout << vetor[i] << " ";
+    int* vetores[] = {vetor1, vetor2, vetor3, vetor4, vetor5};
+    int tamanhos[] = {0, 1, 5, 5, 8};
+
+    for (int i = 0; i < 5; ++i) {
+        int* vetor = vetores[i];
+        int n = tamanhos[i];
+
+        cout << "Vetor " << i+1 << ": ";
+        for (int j = 0; j < n; ++j) {
+            cout << vetor[j] << " ";
         }
         cout << endl;
 

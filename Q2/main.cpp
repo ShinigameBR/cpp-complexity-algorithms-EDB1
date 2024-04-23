@@ -3,18 +3,21 @@ using namespace std;
 
 int busca_binaria_iterativa(int *a, int n, int x)
 {
-    n = n - 1;
-    for (int i = 0; i <= n; ) {
-        int aux = (i + n) / 2;
+    int begin = 0;
+    int end = n - 1;
 
-        if (a[aux] == x) {
-            return aux;
+    while (begin <= end) {
+
+        int mid = (begin + end) / 2;
+
+        if (a[mid] == x) {
+            return mid;
         }
-        else if (a[aux] < x) {
-            i = aux + 1;
-        }
-        else {
-            n = aux - 1;
+
+        if (a[mid] < x) {
+            begin = mid + 1;
+        } else {
+            end = mid;
         }
     }
 
@@ -25,19 +28,21 @@ int busca_binaria_iterativa(int *a, int n, int x)
 void testar_busca_binaria_iterativa() {
     cout << "Testando busca binária iterativa\n\n";
 
-    // Vetor de teste
-    int vetores[][10] = {
-        {1, 2, 3, 4, 5},           // Vetor em ordem crescente
-        {2, 3, 5, 6, 7},           // Vetor em ordem crescente
-        {-6, 1, 2, 3, 8},           // Vetor em ordem crescente
-        
-    };
+    // Vetores de teste
+    int vetor1[] = {1, 2, 3, 4, 5};           // Vetor em ordem crescente
+    int vetor2[] = {2, 3, 5, 6, 7};           // Vetor em ordem crescente
+    int vetor3[] = {-6, 1, 2, 3, 8};          // Vetor em ordem crescente
 
-    for (auto& vetor : vetores) {
-        int n = sizeof(vetor) / sizeof(vetor[0]);
-        cout << "Vetor: ";
-        for (int i = 0; i < n; i++) {
-            cout << vetor[i] << " ";
+    int* vetores[] = {vetor1, vetor2, vetor3};
+    int tamanhos[] = {5, 5, 5};
+
+    for (int i = 0; i < 3; ++i) {
+        int* vetor = vetores[i];
+        int n = tamanhos[i];
+
+        cout << "Vetor " << i+1 << ": ";
+        for (int j = 0; j < n; ++j) {
+            cout << vetor[j] << " ";
         }
         cout << endl;
 
@@ -45,7 +50,7 @@ void testar_busca_binaria_iterativa() {
 
         cout << "Elemento a ser buscado: " << x << endl;
         int resultado = busca_binaria_iterativa(vetor, n, x);
-        cout << "Resultado esperado: " << (resultado != -1 ? "Índice " + to_string(resultado) : "Não encontrado") << endl;
+        cout << "Resultado: " << (resultado != -1 ? "Índice " + to_string(resultado) : "Não encontrado") << endl;
         cout << endl;
     }
 }
